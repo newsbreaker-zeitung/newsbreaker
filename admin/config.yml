@@ -1,0 +1,25 @@
+backend:
+  name: github
+  repo: newsbreaker-zeitung/newsbreaker
+  branch: main
+
+media_folder: "dateien"
+public_folder: "dateien"
+
+collections:
+  - name: "daten"
+    label: "Zeitungskonfiguration"
+    files:
+      - file: "ausgaben.json"
+        label: "Ausgaben verwalten"
+        name: "ausgaben"
+        fields:
+          - label: "Alle Ausgaben"
+            name: "ausgaben_liste"
+            widget: "list"
+            summary: "{{fields.titel}}"
+            fields:
+              - { label: "Titel (z.B. Ausgabe 8)", name: "titel", widget: "string" }
+              - { label: "Kurze Beschreibung", name: "beschreibung", widget: "text" }
+              - { label: "Vorschau-Bild (optional)", name: "cover", widget: "image", required: false }
+              - { label: "PDF-Datei hochladen", name: "pdf", widget: "file" }
