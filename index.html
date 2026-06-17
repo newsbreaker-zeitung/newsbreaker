@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Schüler*Innen-Zeitung NEWSBREAKER</title>
     <style>
-
         :root {
             --primary-black: #000000;
             --primary-white: #ffffff;
@@ -104,16 +103,15 @@
             background-color: #333;
         }
 
-        /* --- Footer --- */
         footer {
             margin-top: 100px;
             text-align: center;
             padding: 40px;
             font-size: 0.9rem;
             border-top: 1px solid #eee;
+            line-height: 1.6;
         }
 
-        /* Mobile Anpassung */
         @media (max-width: 600px) {
             h1 { font-size: 1.8rem; }
             .issue-card { border-width: 3px; }
@@ -127,20 +125,49 @@
         <h1>Unsere Ausgaben</h1>
     </header>
 
-    <main class="archive-container">
-        <article class="issue-card">
-            <img src="https://via.placeholder.com/400x560/ffffff/000000?text=TITELBLATT+VORSCHAU" alt="Ausgabe 1 Cover" class="issue-preview">
-            <div class="issue-info">
-                <h2>Ausgabe 1</h2>
-                <p>Kurze Beschreibung</p>
-                <a href="dateien/newsbreaker-ausgabe-8.pdf" download class="download-btn">PDF Herunterladen</a>
-            </div>
-        </article>
-        </main>
+    <!-- Hier werden die Ausgaben automatisch reingeladen -->
+    <main class="archive-container" id="zeitungs-archiv">
+        <p style="text-align: center;">Ausgaben werden geladen...</p>
+    </main>
 
     <footer>
-        <p>&copy; 2026 NEWSBREAKER - Schüler*innen-Zeitung der LVR-Luise-Leven-Schule Krefeld</p>
+        <p>NEWSBREAKER - Schüler*innen-Zeitung der LVR-Luise-Leven-Schule Krefeld</p>
+        <p style="margin-top: 10px; font-size: 0.8rem; color: #666;">Website erstellt von Thomas (Mitglied der NEWSBREAKER von 2023 bis 2026)</p>
     </footer>
+
+    <!-- Das Skript, das die ausgaben.json ausliest -->
+    <script>
+        fetch('ausgaben.json')
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('zeitungs-archiv');
+                container.innerHTML = ''; // "Wird geladen..." entfernen
+
+                // Falls noch keine Ausgaben da sind
+                if (!data.ausgaben_liste || data.ausgaben_liste.length === 0) {
+                    container.innerHTML = '<p style="text-align: center;">Aktuell sind keine Ausgaben online.</p>';
+                    return;
+                }
+
+                // Jede Ausgabe aus der JSON-Datei auf der Seite anzeigen
+                data.ausgaben_liste.forEach(ausgabe => {
+                    container.innerHTML += `
+                        <article class="issue-card">
+                            <img src="${ausgabe.cover || 'https://via.placeholder.com/400x560/ffffff/000000?text=VORSCHAU'}" alt="${ausgabe.titel} Cover" class="issue-preview">
+                            <div class="issue-info">
+                                <h2>${ausgabe.titel}</h2>
+                                <p>${ausgabe.beschreibung}</p>
+                                <a href="${ausgabe.pdf}" download class="download-btn">PDF Herunterladen</a>
+                            </div>
+                        </article>
+                    `;
+                });
+            })
+            .catch(err => {
+                console.error("Fehler beim Laden der Ausgaben:", err);
+                document.getElementById('zeitungs-archiv').innerHTML = '<p style="text-align: center; color: red;">Fehler beim Laden der Ausgaben.</p>';
+            });
+    </script>
 
 </body>
 </html>
