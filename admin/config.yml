@@ -4,6 +4,7 @@ backend:
   branch: main
   base_url: https://newsbreaker-login.vercel.app
   site_id: 113212f6-b4b1-40b4-8ccb-a0f97e31f5dc
+  auth_endpoint: /api
 
 media_folder: "dateien"
 public_folder: "/newsbreaker/dateien"
