@@ -1,3 +1,10 @@
 {
-  "ausgaben_liste": []
+  "ausgaben_liste": [
+    {
+      "titel": "Ausgabe 1 - Dezember 2023",
+      "beschreibung": "Das ist unsere erste Ausgabe der Schüler*innenzeitung.",
+      "cover": "/newsbreaker/dateien/8.png",
+      "pdf": "/newsbreaker/dateien/1.-ausgabe.pdf"
+    }
+  ]
 }
