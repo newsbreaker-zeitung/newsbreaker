@@ -2,6 +2,8 @@ backend:
   name: github
   repo: newsbreaker-zeitung/newsbreaker
   branch: main
+  base_url: https://api.netlify.com
+  site_id: 113212f6-b4b1-40b4-8ccb-a0f97e31f5dc
 
 media_folder: "dateien"
 public_folder: "/newsbreaker/dateien"
