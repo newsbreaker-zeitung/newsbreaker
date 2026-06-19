@@ -11,6 +11,24 @@
             --bg-gray: #f4f4f4;
             --header-font: 'Klein', sans-serif;
             --body-font: 'Cocomat Pro', sans-serif;
+            
+            /* Neue Variablen für flexiblere Anpassung */
+            --card-hover-shadow: rgba(0, 0, 0, 0.15);
+            --placeholder-border: #ddd;
+            --text-muted: #666;
+        }
+
+        /* Automatischer Darkmode basierend auf Systemeinstellungen */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --primary-black: #ffffff;
+                --primary-white: #121212; /* Angenehmes, dunkles Anthrazit statt reinem Schwarz */
+                --bg-gray: #1e1e1e;
+                
+                --card-hover-shadow: rgba(255, 255, 255, 0.2);
+                --placeholder-border: #333;
+                --text-muted: #aaa;
+            }
         }
 
         * {
@@ -24,6 +42,7 @@
             background-color: var(--primary-white);
             color: var(--primary-black);
             padding: 20px;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         header {
@@ -37,6 +56,13 @@
             max-width: 120px;
             height: auto;
             margin-bottom: 20px;
+            /* Invertiert das Logo leicht im Darkmode, falls es rein schwarz ist */
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            .logo-small {
+                filter: invert(1);
+            }
         }
 
         h1 {
@@ -55,11 +81,12 @@
         }
 
         .issue-card {
+            background-color: var(--primary-white);
             border: 5px solid var(--primary-black);
             padding: 20px;
             display: flex;
             flex-direction: column;
-            transition: transform 0.2s;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
         .issue-card:hover {
@@ -69,7 +96,7 @@
 
         .issue-preview {
             width: 100%;
-            border: 1px solid #ddd;
+            border: 1px solid var(--placeholder-border);
             margin-bottom: 20px;
         }
 
@@ -96,13 +123,18 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-top: auto;
-            transition: 0.3s;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         .download-btn:hover {
             background-color: #333;
         }
-
+        
+        @media (prefers-color-scheme: dark) {
+            .download-btn:hover {
+                background-color: #e0e0e0;
+            }
+        }
 
         @media (max-width: 600px) {
             h1 { font-size: 1.8rem; }
@@ -110,41 +142,41 @@
         }
 
         footer {
-    margin-top: 100px;
-    text-align: center;
-    padding: 40px 20px;
-    border-top: 2px solid var(--primary-black);
-    line-height: 1.6;
-}
+            margin-top: 100px;
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 2px solid var(--primary-black);
+            line-height: 1.6;
+        }
 
-.footer-content {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-}
+        .footer-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
 
-.login-link {
-    display: inline-block;
-    color: var(--primary-black);
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    padding: 6px 14px;
-    border: 2px solid var(--primary-black);
-    margin-bottom: 10px;
-    transition: all 0.2s ease;
-}
+        .login-link {
+            display: inline-block;
+            color: var(--primary-black);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 6px 14px;
+            border: 2px solid var(--primary-black);
+            margin-bottom: 10px;
+            transition: all 0.2s ease;
+        }
 
-.login-link:hover {
-    background-color: var(--primary-black);
-    color: var(--primary-white);
-    box-shadow: 4px 4px 0px rgba(0,0,0,0.15);
-}
+        .login-link:hover {
+            background-color: var(--primary-black);
+            color: var(--primary-white);
+            box-shadow: 4px 4px 0px var(--card-hover-shadow);
+        }
     </style>
 </head>
 <body>
